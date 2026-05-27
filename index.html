@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#2196F3">
-    <title>Jatão do Guardião - Sistema Completo</title>
+    <title>Jatão do Guardião - Sistema Profissional</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; padding-bottom: 70px; }
@@ -31,36 +31,28 @@
         button.warning { background: #ff9800; }
         .btn-backup { background: linear-gradient(135deg, #6c5ce7, #4834d4); width: calc(50% - 5px); display: inline-block; margin: 5px; }
         .btn-restore { background: linear-gradient(135deg, #e84393, #c44569); width: calc(50% - 5px); display: inline-block; margin: 5px; }
-        .btn-contato { background: linear-gradient(135deg, #25D366, #128C7E); position: fixed; bottom: 80px; right: 20px; width: auto; padding: 12px 20px; border-radius: 50px; z-index: 1001; box-shadow: 0 4px 12px rgba(0,0,0,0.3); font-weight: bold; display: flex; align-items: center; gap: 8px; animation: pulse-green 2s infinite; }
-        .btn-contato:hover { transform: scale(1.05); }
-        @keyframes pulse-green { 0% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); } 50% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.8); } 100% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); } }
+        .btn-contato { position: fixed; bottom: 80px; right: 20px; width: auto; padding: 12px 20px; border-radius: 50px; z-index: 1001; box-shadow: 0 4px 12px rgba(0,0,0,0.3); font-weight: bold; display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border: none; }
         .table-responsive { overflow-x: auto; margin-top: 10px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; font-size: 14px; }
         th { background: #f5f5f5; font-weight: 600; color: #333; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px; }
         .stat-card { background: white; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .stat-value { font-size: 28px; font-weight: bold; color: #2196F3; }
+        .stat-value { font-size: 24px; font-weight: bold; color: #2196F3; }
         .stat-label { font-size: 12px; color: #666; margin-top: 5px; }
         .lavagem-item { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
         .status-em-lavagem { background: #ff9800; color: white; }
         .status-finalizado { background: #4caf50; color: white; }
-        .status-entregue { background: #9e9e9e; color: white; }
         .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; padding: 20px; overflow-y: auto; }
         .modal-content { background: white; border-radius: 12px; padding: 20px; max-width: 500px; margin: 50px auto; }
         .login-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .login-box { background: white; border-radius: 20px; padding: 30px; width: 100%; max-width: 400px; }
-        .btn-pequeno { padding: 5px 10px; font-size: 12px; width: auto; margin: 2px; display: inline-block; }
+        .btn-pequeno { padding: 6px 12px; font-size: 13px; width: auto; margin: 2px; display: inline-block; }
         .flex { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-        .acao-botoes { white-space: nowrap; }
-        .filtro-periodo { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .filtro-periodo { background: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #eee; }
         .filtro-periodo input { width: auto; display: inline-block; margin: 5px; }
         .trial-banner { background: linear-gradient(135deg, #ff9800, #f44336); color: white; padding: 10px; text-align: center; font-weight: bold; cursor: pointer; }
-        .trial-banner.warning { background: linear-gradient(135deg, #f44336, #d32f2f); animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
-        .license-modal { text-align: center; }
-        .license-code { font-family: monospace; font-size: 18px; background: #f5f5f5; padding: 10px; border-radius: 8px; margin: 10px 0; word-break: break-all; }
         .aviso { background: #ff9800; color: white; padding: 10px; border-radius: 8px; margin-bottom: 10px; text-align: center; }
         .aviso a { color: white; font-weight: bold; }
         .backup-buttons { display: flex; gap: 10px; margin-bottom: 20px; }
@@ -68,8 +60,11 @@
         #fileImport { display: none; }
         .toast { position: fixed; top: 20px; right: 20px; background: #4caf50; color: white; padding: 12px 20px; border-radius: 8px; z-index: 9999; animation: slideInRight 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
         .toast.error { background: #f44336; }
-        .toast.warning { background: #ff9800; }
         @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        .relatorio-bloco { background: #fafafa; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin-bottom: 15px; }
+        .relatorio-bloco h4 { margin-bottom: 10px; color: #0d47a1; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px; }
+        .relatorio-linha { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #eee; font-size: 14px; }
+        .relatorio-linha:last-child { border-bottom: none; font-weight: bold; color: #2196F3; }
     </style>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
 </head>
@@ -79,7 +74,6 @@
     <div class="login-box">
         <h2 style="text-align:center; margin-bottom:20px;">⛔ Período de Teste Expirado</h2>
         <p style="text-align:center; margin-bottom:20px;">Seu período de teste de 45 dias expirou.</p>
-        <p style="text-align:center;">Entre em contato para adquirir a licença completa.</p>
         <button id="copyDeviceIdBtn" style="margin-top:20px;">📱 Copiar ID do Dispositivo</button>
         <button id="btnContatoEmergencial" style="margin-top:10px; background:#25D366;">📞 Entrar em Contato</button>
         <button id="btnAtivarLicenca" style="margin-top:10px; background:#4caf50;">🔑 Ativar Licença</button>
@@ -101,10 +95,10 @@
 </div>
 
 <div id="trialModal" class="modal">
-    <div class="modal-content license-modal">
+    <div class="modal-content" style="text-align:center;">
         <h3>🔐 Informações da Licença</h3>
         <div id="trialInfo"></div>
-        <button id="closeTrialModal">Fechar</button>
+        <button id="closeTrialModal" style="margin-top:15px;">Fechar</button>
     </div>
 </div>
 
@@ -148,7 +142,7 @@
         <input type="file" id="fileImport" accept=".xlsx">
         
         <div class="filtro-periodo">
-            <h4>📅 Filtrar Dashboard</h4>
+            <h4>📅 Filtrar Dashboard (Apenas Entregues)</h4>
             <div class="flex">
                 <input type="date" id="dashboardDataInicio">
                 <input type="date" id="dashboardDataFim">
@@ -158,7 +152,7 @@
         </div>
         <div class="stats-grid" id="dashboardStats"></div>
         <div class="card">
-            <h3>📋 Últimas Lavagens</h3>
+            <h3>📋 Últimos Registros (Entregues)</h3>
             <div id="ultimasLavagens"></div>
         </div>
     </div>
@@ -231,21 +225,21 @@
                 <div class="form-group">
                     <label>📂 Categoria</label>
                     <select id="tipoCategoria" required>
-                        <option value="veiculo">Veículo</option>
-                        <option value="servico">Serviço Extra</option>
+                        <option value="veiculo">Veículo (Ex: Estética, Padrão, Grande)</option>
+                        <option value="servico">Serviço Extra (Ex: Polimento, Lavagem Simples, Cera)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>📝 Descrição</label>
-                    <input type="text" id="tipoDescricao" placeholder="Descrição" required>
+                    <label>📝 Descrição / Nome</label>
+                    <input type="text" id="tipoDescricao" placeholder="Ex: Estética ou Polimento" required>
                 </div>
                 <div class="form-group">
-                    <label>💰 Valor (R$)</label>
-                    <input type="number" id="tipoValor" placeholder="Valor" required step="0.01" value="1">
+                    <label>💰 Valor Cobrado (R$)</label>
+                    <input type="number" id="tipoValor" placeholder="Valor" required step="0.01" value="0">
                 </div>
                 <div class="form-group">
-                    <label>💵 Comissão (R$)</label>
-                    <input type="number" id="tipoComissao" placeholder="Comissão" required step="0.01" value="1">
+                    <label>💵 Comissão do Lavador (R$)</label>
+                    <input type="number" id="tipoComissao" placeholder="Comissão" required step="0.01" value="0">
                 </div>
                 <div class="form-group">
                     <label>⏱️ Tempo Médio (min)</label>
@@ -255,7 +249,7 @@
             </form>
         </div>
         <div class="card">
-            <h3>📋 Veículos</h3>
+            <h3>📋 Categorias de Veículos</h3>
             <div id="listaVeiculosTipos"></div>
         </div>
         <div class="card">
@@ -284,7 +278,7 @@
                 </div>
                 <div id="infoVeiculo" style="background:#f0f0f0; padding:10px; border-radius:8px; margin:10px 0;"></div>
                 <div class="form-group">
-                    <label>🔧 Serviço Extra</label>
+                    <label>🔧 Serviço Extra Incorporado</label>
                     <select id="lavagemServicoExtra">
                         <option value="">Nenhum serviço extra</option>
                     </select>
@@ -311,7 +305,7 @@
 
     <div class="container" id="relatoriosContainer">
         <div class="card">
-            <h3>📊 Relatórios</h3>
+            <h3>📊 Painel de Relatórios Consolidados</h3>
             <div class="filtro-periodo">
                 <h4>📅 Filtrar por Período</h4>
                 <div class="flex">
@@ -321,14 +315,17 @@
                     <button id="limparFiltroRelatorio" class="btn-pequeno">Limpar</button>
                 </div>
             </div>
-            <div class="flex" style="margin-bottom:15px;">
-                <button id="btnRelDiario" class="btn-pequeno">📅 Diário</button>
-                <button id="btnRelLavador" class="btn-pequeno">👨‍🔧 Por Lavador</button>
-                <button id="btnRelTipo" class="btn-pequeno">🚗 Por Tipo</button>
-                <button id="btnRelGeral" class="btn-pequeno">📊 Geral</button>
-                <button id="btnExportar" class="btn-pequeno">📎 Exportar XLSX</button>
+            <div class="flex" style="margin-bottom:20px;">
+                <button id="btnRelDiario" class="success btn-pequeno">1. Resumo Executivo Diário</button>
+                <button id="btnRelLavador" class="warning btn-pequeno">2. Por Lavador</button>
+                <button id="btnRelTipo" class="warning btn-pequeno">3. Por Tipo</button>
+                <button id="btnRelGeral" class="btn-pequeno" style="background:#0d47a1;">4. Relatório Geral (Tabela)</button>
+                <button id="btnExportar" class="btn-pequeno" style="background:#6c5ce7;">📎 Exportar Excel</button>
             </div>
-            <div id="relatorioConteudo"></div>
+            
+            <div id="relatorioConteudo">
+                <p style="text-align:center; color:#777; padding:20px;">Selecione um dos modelos de relatório acima para visualizar os dados.</p>
+            </div>
         </div>
     </div>
 
@@ -358,7 +355,7 @@
         <h3>🚗 Cadastrar Novo Veículo</h3>
         <form id="formCadastroRapido">
             <div class="form-group"><label>🔢 Placa</label><input type="text" id="rapidoPlaca" placeholder="ABC1234" required></div>
-            <div class="form-group"><label>🚘 Tipo do Veículo</label><select id="rapidoTipo" required><option value="">Selecione o tipo</option></select></div>
+            <div class="form-group"><label>🚘 Tipo / Categoria do Veículo</label><select id="rapidoTipo" required><option value="">Selecione</option></select></div>
             <div class="form-group"><label>👤 Proprietário</label><input type="text" id="rapidoProprietario" placeholder="Nome do proprietário"></div>
             <div class="form-group"><label>📱 Celular</label><input type="tel" id="rapidoCelular" placeholder="(99) 99999-9999"></div>
             <div class="flex"><button type="submit" class="success">Cadastrar</button><button type="button" id="fecharModalVeiculo" class="danger">Cancelar</button></div>
@@ -378,7 +375,7 @@
 </div>
 
 <script>
-// ==================== TOAST ====================
+// TOAST NOTIFICATION
 function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
@@ -387,11 +384,9 @@ function showToast(message, type = 'success') {
     setTimeout(() => toast.remove(), 2000);
 }
 
-// ==================== LICENCIAMENTO ====================
+// CONTROLE DE LICENÇA (45 DIAS)
 function getDeviceId() {
-    let deviceInfo = [navigator.userAgent, navigator.language, navigator.platform, `${screen.width}x${screen.height}x${screen.colorDepth}`, Intl.DateTimeFormat().resolvedOptions().timeZone, 'ontouchstart' in window ? 'touch' : 'no-touch'];
-    if(navigator.deviceMemory) deviceInfo.push(navigator.deviceMemory);
-    if(navigator.hardwareConcurrency) deviceInfo.push(navigator.hardwareConcurrency);
+    let deviceInfo = [navigator.userAgent, navigator.language, navigator.platform, `${screen.width}x${screen.height}`, Intl.DateTimeFormat().resolvedOptions().timeZone];
     const combined = deviceInfo.join('|');
     let hash = 0;
     for(let i = 0; i < combined.length; i++) { hash = ((hash << 5) - hash) + combined.charCodeAt(i); hash |= 0; }
@@ -404,13 +399,7 @@ let licenseData = null;
 function initLicense() {
     const deviceId = getDeviceId();
     const saved = localStorage.getItem('JATAO_GUARDIAO_LICENSE');
-    if(saved) {
-        licenseData = JSON.parse(saved);
-        if(licenseData.deviceId !== deviceId && licenseData.isLicensed) {
-            licenseData.isLicensed = false;
-            localStorage.setItem('JATAO_GUARDIAO_LICENSE', JSON.stringify(licenseData));
-        }
-    }
+    if(saved) { licenseData = JSON.parse(saved); }
     if(!licenseData) {
         const start = new Date();
         licenseData = { deviceId, startDate: start.toISOString(), endDate: new Date(start.getTime() + TRIAL_DAYS * 86400000).toISOString(), isLicensed: false };
@@ -428,20 +417,6 @@ function getRemainingDays() {
 
 function isTrialValid() { return licenseData && (licenseData.isLicensed || getRemainingDays() > 0); }
 
-function ativarLicenca(chave) {
-    if(chave === "JATAO-2024-HERBERT-OK") {
-        licenseData.isLicensed = true;
-        licenseData.deviceId = getDeviceId();
-        localStorage.setItem('JATAO_GUARDIAO_LICENSE', JSON.stringify(licenseData));
-        showToast('✅ Licença ativada!', 'success');
-        document.getElementById('ativarModal').style.display = 'none';
-        updateTrialDisplay();
-        return true;
-    }
-    showToast('❌ Chave inválida!', 'error');
-    return false;
-}
-
 function updateTrialDisplay() {
     if(!isTrialValid()) {
         document.getElementById('loginContainer').style.display = 'none';
@@ -453,11 +428,11 @@ function updateTrialDisplay() {
     const banner = document.getElementById('trialBanner');
     const trialDisplay = document.getElementById('trialDisplay');
     if(licenseData.isLicensed) {
-        if(banner) banner.innerHTML = '✅ Sistema Licenciado';
+        if(banner) banner.innerHTML = '✅ Sistema Original Licenciado';
         if(trialDisplay) trialDisplay.innerHTML = '✅ Licenciado';
     } else {
-        if(banner) banner.innerHTML = `🔐 Teste: ${remaining} dias restantes`;
-        if(trialDisplay) trialDisplay.innerHTML = `🔐 Teste grátis: ${remaining} dias`;
+        if(banner) banner.innerHTML = `🔐 Período de Teste: ${remaining} dias restantes`;
+        if(trialDisplay) trialDisplay.innerHTML = `🔐 Período de Teste: ${remaining} dias restantes`;
     }
     return true;
 }
@@ -465,54 +440,19 @@ function updateTrialDisplay() {
 function showTrialInfo() {
     const deviceId = getDeviceId();
     document.getElementById('trialInfo').innerHTML = `
-        <div class="license-code">ID: ${deviceId}</div>
-        <p>Status: ${licenseData.isLicensed ? '✅ Licenciado' : '📝 Teste'}</p>
-        <p>Início: ${new Date(licenseData.startDate).toLocaleDateString()}</p>
-        <p>Expira: ${new Date(licenseData.endDate).toLocaleDateString()}</p>
-        ${!licenseData.isLicensed ? `<p>Dias restantes: ${getRemainingDays()}</p>` : ''}
-        <button id="copyIdBtn" class="btn-pequeno">📋 Copiar ID</button>
-        <button id="contatoBtn" class="btn-pequeno" style="background:#25D366">📞 Suporte</button>
+        <div style="background:#eee; padding:10px; font-family:monospace; margin-bottom:10px;">ID: ${deviceId}</div>
+        <p>Status: ${licenseData.isLicensed ? '✅ Ativado Permanente' : '📝 Modo de Avaliação'}</p>
+        <p>Expira em: ${new Date(licenseData.endDate).toLocaleDateString()}</p>
+        <button id="copyIdBtn" class="btn-pequeno">📋 Copiar ID do Dispositivo</button>
     `;
     document.getElementById('trialModal').style.display = 'block';
-    document.getElementById('copyIdBtn').onclick = () => { navigator.clipboard.writeText(deviceId); showToast('ID copiado!'); };
-    document.getElementById('contatoBtn').onclick = () => window.open('https://wa.me/5592988036775?text=Preciso%20de%20suporte', '_blank');
+    document.getElementById('copyIdBtn').onclick = () => { navigator.clipboard.writeText(deviceId); showToast('ID Copiado!'); };
 }
 
-// ==================== BACKUP ====================
-function fazerBackupXLSX() {
-    try {
-        const wb = XLSX.utils.book_new();
-        const lavagensData = (db.lavagens || []).map(l => ({ 'Data': new Date(l.data).toLocaleString(), 'Placa': l.placa, 'Valor': l.valor, 'Status': l.status }));
-        XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(lavagensData), 'Lavagens');
-        XLSX.writeFile(wb, `backup_${new Date().toISOString().split('T')[0]}.xlsx`);
-        showToast('✅ Backup realizado!');
-    } catch(e) { showToast('Erro no backup', 'error'); }
-}
-
-function importarBackupXLSX(file) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        try {
-            const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
-            const sheet = workbook.Sheets['Lavagens'];
-            if(sheet) {
-                const dados = XLSX.utils.sheet_to_json(sheet);
-                db.lavagens = dados.map(d => ({ id: Date.now() + Math.random(), data: new Date(d.Data).toISOString(), placa: d.Placa, valor: d.Valor, status: d.Status }));
-                saveData();
-                renderDashboard();
-                showToast('✅ Importado!');
-            }
-        } catch(e) { showToast('Erro ao importar', 'error'); }
-    };
-    reader.readAsArrayBuffer(file);
-}
-
-// ==================== SISTEMA PRINCIPAL ====================
+// MODELO DE DADOS PRINCIPAL
 let db = { users: [], lavadores: [], tiposVeiculo: [], veiculos: [], lavagens: [], currentUser: null };
 let currentDashboardFilter = { inicio: null, fim: null };
 let currentRelatorioFilter = { inicio: null, fim: null };
-let currentEditType = null;
-let currentEditId = null;
 
 function loadData() {
     const saved = localStorage.getItem('jataoGuardiaoDB');
@@ -520,35 +460,24 @@ function loadData() {
     else {
         db.users = [{ id: 1, nome: "Administrador", usuario: "admin", senha: "admin123", nivel: "Administrador" }];
         db.tiposVeiculo = [
-            { id: 1, categoria: "veiculo", descricao: "Moto", valor: 1, comissao: 1, tempo: 20 },
-            { id: 2, categoria: "veiculo", descricao: "Carro Pequeno", valor: 1, comissao: 1, tempo: 30 },
-            { id: 3, categoria: "veiculo", descricao: "Carro Grande", valor: 1, comissao: 1, tempo: 45 },
-            { id: 4, categoria: "veiculo", descricao: "Pick-up", valor: 1, comissao: 1, tempo: 60 },
-            { id: 5, categoria: "veiculo", descricao: "Van", valor: 1, comissao: 1, tempo: 75 },
-            { id: 6, categoria: "veiculo", descricao: "Caminhão", valor: 1, comissao: 1, tempo: 90 },
-            { id: 7, categoria: "veiculo", descricao: "Ônibus", valor: 1, comissao: 1, tempo: 120 },
-            { id: 8, categoria: "servico", descricao: "Cera", valor: 1, comissao: 1, tempo: 15 },
-            { id: 9, categoria: "servico", descricao: "Polimento simples", valor: 1, comissao: 1, tempo: 30 },
-            { id: 10, categoria: "servico", descricao: "Polimento cristalizado", valor: 1, comissao: 1, tempo: 45 },
-            { id: 11, categoria: "servico", descricao: "Lavagem do motor", valor: 1, comissao: 1, tempo: 20 },
-            { id: 12, categoria: "servico", descricao: "Lavagem por baixo", valor: 1, comissao: 1, tempo: 25 },
-            { id: 13, categoria: "servico", descricao: "Lavagem interna simples", valor: 1, comissao: 1, tempo: 20 },
-            { id: 14, categoria: "servico", descricao: "Lavagem interna completa", valor: 1, comissao: 1, tempo: 40 }
+            { id: 1, categoria: "veiculo", descricao: "Padrão", valor: 60.00, comissao: 18.00, tempo: 30 },
+            { id: 2, categoria: "veiculo", descricao: "Estética", valor: 150.00, comissao: 45.00, tempo: 60 },
+            { id: 3, categoria: "servico", descricao: "Polimento", valor: 150.00, comissao: 45.00, tempo: 45 },
+            { id: 4, categoria: "servico", descricao: "Lavagem Simples", valor: 60.00, comissao: 18.00, tempo: 30 }
         ];
-        db.lavadores = [{ id: 1, nome: "João Silva", celular: "11999999999", ativo: true }];
+        db.lavadores = [{ id: 1, nome: "Carlos", celular: "92999999999", ativo: true }, { id: 2, nome: "Marcos", celular: "92988888888", ativo: true }];
         db.veiculos = [];
         db.lavagens = [];
     }
     saveData();
 }
+
 function saveData() { localStorage.setItem('jataoGuardiaoDB', JSON.stringify(db)); }
 function isAdmin() { return db.currentUser && db.currentUser.nivel === "Administrador"; }
-function login(u, s) { const user = db.users.find(u2 => u2.usuario === u && u2.senha === s); if(user) { db.currentUser = user; saveData(); return true; } return false; }
-function logout() { db.currentUser = null; saveData(); document.getElementById('loginContainer').style.display = 'flex'; document.getElementById('appContainer').style.display = 'none'; updateTrialDisplay(); showToast('Logout realizado!'); }
-function registerUser(nome, usuario, senha) { if(db.users.find(u => u.usuario === usuario)) { showToast('Usuário existe!', 'error'); return false; } db.users.push({ id: Date.now(), nome, usuario, senha, nivel: "Operador" }); saveData(); showToast('Usuário registrado!'); return true; }
 function getTipoVeiculo(id) { return db.tiposVeiculo.find(t => t.id == id); }
 function getVeiculoByPlaca(p) { return db.veiculos.find(v => v.placa.toUpperCase() === p.toUpperCase()); }
 function getLavador(id) { return db.lavadores.find(l => l.id == id); }
+
 function abrirCadastroLavadorModalLavagem() { document.getElementById('cadastroLavadorModal').style.display = 'block'; }
 function abrirCadastroVeiculoModalLavagem(placa) {
     const select = document.getElementById('rapidoTipo');
@@ -557,6 +486,7 @@ function abrirCadastroVeiculoModalLavagem(placa) {
     document.getElementById('rapidoPlaca').value = placa;
     document.getElementById('cadastroVeiculoModal').style.display = 'block';
 }
+
 function verificarLavadoresAtivos() {
     const ativos = (db.lavadores || []).filter(l => l.ativo).length;
     const aviso = document.getElementById('avisoLavador');
@@ -564,40 +494,47 @@ function verificarLavadoresAtivos() {
     if(ativos === 0) { if(aviso) aviso.style.display = 'block'; if(select) select.disabled = true; }
     else { if(aviso) aviso.style.display = 'none'; if(select) select.disabled = false; }
 }
-function entrarEmContato() { window.open('https://wa.me/5592988036775?text=Olá%20Herbert!', '_blank'); }
 
-function filtrarLavagensPorPeriodo(lavagens, inicio, fim) {
-    if(!inicio && !fim) return lavagens;
+// MOTOR DE FILTRAGEM CORRIGIDO (FUSO HORÁRIO E STRINGS PURAS)
+function filtrarLavagensPorData(lavagens, inicioStr, fimStr) {
     return lavagens.filter(l => {
-        const data = new Date(l.data); data.setHours(0,0,0,0);
-        if(inicio && data < new Date(inicio)) return false;
-        if(fim) { const f = new Date(fim); f.setHours(23,59,59,999); if(data > f) return false; }
+        // Pega apenas a parte YYYY-MM-DD da data gravada no sistema
+        const dataItemStr = l.data.split('T')[0];
+        
+        if (inicioStr && dataItemStr < inicioStr) return false;
+        if (fimStr && dataItemStr > fimStr) return false;
+        
         return true;
     });
 }
 
+function login(u, s) { const user = db.users.find(u2 => u2.usuario === u && u2.senha === s); if(user) { db.currentUser = user; saveData(); return true; } return false; }
+function logout() { db.currentUser = null; saveData(); document.getElementById('loginContainer').style.display = 'flex'; document.getElementById('appContainer').style.display = 'none'; updateTrialDisplay(); }
+
+// RENDERS INTERNOS
 function renderDashboard() {
-    let lavagens = db.lavagens || [];
-    if(currentDashboardFilter.inicio || currentDashboardFilter.fim) lavagens = filtrarLavagensPorPeriodo(lavagens, currentDashboardFilter.inicio, currentDashboardFilter.fim);
+    let lavagens = (db.lavagens || []).filter(l => l.status === 'Entregue');
+    
+    if(currentDashboardFilter.inicio || currentDashboardFilter.fim) {
+        lavagens = filtrarLavagensPorData(lavagens, currentDashboardFilter.inicio, currentDashboardFilter.fim);
+    }
+    
     const total = lavagens.length;
-    const faturamento = lavagens.reduce((s,l) => s + l.valor, 0);
-    const comissao = lavagens.reduce((s,l) => s + l.comissao, 0);
+    const faturamento = lavagens.reduce((s,l) => s + (l.faturamento || 0), 0);
+    const comissao = lavagens.reduce((s,l) => s + (l.comissaoTotal || 0), 0);
+    
     document.getElementById('dashboardStats').innerHTML = `
-        <div class="stat-card"><div class="stat-value">${total}</div><div class="stat-label">Lavagens</div></div>
-        <div class="stat-card"><div class="stat-value">R$ ${faturamento.toFixed(2)}</div><div class="stat-label">Faturamento</div></div>
-        <div class="stat-card"><div class="stat-value">R$ ${(faturamento-comissao).toFixed(2)}</div><div class="stat-label">Lucro</div></div>
-        <div class="stat-card"><div class="stat-value">R$ ${total>0?(faturamento/total).toFixed(2):'0'}</div><div class="stat-label">Ticket Médio</div></div>
+        <div class="stat-card"><div class="stat-value">${total}</div><div class="stat-label">Total Entregues</div></div>
+        <div class="stat-card"><div class="stat-value">R$ ${faturamento.toFixed(2)}</div><div class="stat-label">Bruto</div></div>
+        <div class="stat-card"><div class="stat-value">R$ ${(faturamento - comissao).toFixed(2)}</div><div class="stat-label">Líquido Limpo</div></div>
     `;
-    const ultimas = [...lavagens].reverse().slice(0,10);
+    
+    const ultimas = [...lavagens].reverse().slice(0,5);
     document.getElementById('ultimasLavagens').innerHTML = `
         <div class="table-responsive">
             <table>
-                <thead>
-                    <tr><th>Data</th><th>Placa</th><th>Valor</th><th>Status</th></tr>
-                </thead>
-                <tbody>
-                    ${ultimas.map(l => `<tr><td>${new Date(l.data).toLocaleString()}</td><td>${l.placa}</td><td>R$ ${l.valor.toFixed(2)}</td><td>${l.status}</td></tr>`).join('')}
-                </tbody>
+                <thead><tr><th>Data</th><th>Placa</th><th>Faturamento</th><th>Status</th></tr></thead>
+                <tbody>${ultimas.map(l => `<tr><td>${new Date(l.data).toLocaleDateString()}</td><td>${l.placa}</td><td>R$ ${(l.faturamento || 0).toFixed(2)}</td><td><span class="status status-finalizado">${l.status}</span></td></tr>`).join('')}</tbody>
             </table>
         </div>`;
 }
@@ -606,291 +543,504 @@ function renderLavadores() {
     document.getElementById('listaLavadores').innerHTML = `
         <div class="table-responsive">
             <table>
-                <thead>
-                    <tr><th>Nome</th><th>Celular</th><th>Status</th><th>Ações</th></tr>
-                </thead>
-                <tbody>
-                    ${db.lavadores.map(l => `<tr>
-                        <td>${l.nome}</td>
-                        <td>${l.celular}</td>
-                        <td>${l.ativo ? '✅ Ativo' : '❌ Inativo'}</td>
-                        <td class="acao-botoes">
-                            ${isAdmin() ? `<button class="btn-pequeno warning" onclick="abrirEditarLavador(${l.id})">✏️ Editar</button>
-                            <button class="btn-pequeno" onclick="toggleLavador(${l.id})">${l.ativo ? '🔴 Inativar' : '🟢 Ativar'}</button>
-                            <button class="btn-pequeno danger" onclick="deleteItem('lavador',${l.id})">🗑️ Excluir</button>` : '-'}
-                        </td>
-                    </tr>`).join('')}
-                </tbody>
+                <thead><tr><th>Nome</th><th>Celular</th><th>Status</th><th>Ações</th></tr></thead>
+                <tbody>${db.lavadores.map(l => `<tr>
+                    <td>${l.nome}</td><td>${l.celular}</td><td>${l.ativo ? '✅ Ativo' : '❌ Inativo'}</td>
+                    <td>${isAdmin() ? `<button class="btn-pequeno danger" onclick="deleteItem('lavador',${l.id})">🗑️</button>` : '-'}</td>
+                </tr>`).join('')}</tbody>
             </table>
         </div>`;
     verificarLavadoresAtivos();
 }
 
-function abrirEditarLavador(id) {
-    const lavador = db.lavadores.find(l => l.id == id);
-    if(!lavador) return;
-    currentEditType = 'lavador';
-    currentEditId = id;
-    document.getElementById('modalTitle').innerText = '✏️ Editar Lavador';
-    document.getElementById('modalBody').innerHTML = `
-        <div class="form-group"><label>Nome</label><input type="text" id="editNome" value="${lavador.nome}" required></div>
-        <div class="form-group"><label>Celular</label><input type="text" id="editCelular" value="${lavador.celular}"></div>
-        <div class="form-group"><label><input type="checkbox" id="editAtivo" ${lavador.ativo ? 'checked' : ''}> Ativo</label></div>
-    `;
-    document.getElementById('editModal').style.display = 'block';
-}
-
-function abrirEditarVeiculo(id) {
-    const veiculo = db.veiculos.find(v => v.id == id);
-    if(!veiculo) return;
-    currentEditType = 'veiculo';
-    currentEditId = id;
-    const tipoOptions = db.tiposVeiculo.filter(t => t.categoria === "veiculo").map(t => `<option value="${t.id}" ${t.id == veiculo.tipoId ? 'selected' : ''}>${t.descricao}</option>`).join('');
-    document.getElementById('modalTitle').innerText = '✏️ Editar Veículo';
-    document.getElementById('modalBody').innerHTML = `
-        <div class="form-group"><label>Placa</label><input type="text" id="editPlaca" value="${veiculo.placa}" maxlength="8" required></div>
-        <div class="form-group"><label>Tipo</label><select id="editTipoId">${tipoOptions}</select></div>
-        <div class="form-group"><label>Proprietário</label><input type="text" id="editProprietario" value="${veiculo.proprietario || ''}"></div>
-        <div class="form-group"><label>Celular</label><input type="text" id="editCelular" value="${veiculo.celular || ''}"></div>
-        <div class="form-group"><label>Observações</label><textarea id="editObs" rows="2">${veiculo.observacoes || ''}</textarea></div>
-    `;
-    document.getElementById('editModal').style.display = 'block';
-}
-
-function salvarEdicao() {
-    if(currentEditType === 'lavador') {
-        const lavador = db.lavadores.find(l => l.id == currentEditId);
-        if(lavador) {
-            lavador.nome = document.getElementById('editNome').value;
-            lavador.celular = document.getElementById('editCelular').value;
-            lavador.ativo = document.getElementById('editAtivo').checked;
-            saveData();
-            renderLavadores();
-            updateSelects();
-            showToast('✅ Lavador atualizado!');
-        }
-    } else if(currentEditType === 'veiculo') {
-        const veiculo = db.veiculos.find(v => v.id == currentEditId);
-        if(veiculo) {
-            veiculo.placa = document.getElementById('editPlaca').value.toUpperCase();
-            veiculo.tipoId = parseInt(document.getElementById('editTipoId').value);
-            veiculo.proprietario = document.getElementById('editProprietario').value;
-            veiculo.celular = document.getElementById('editCelular').value;
-            veiculo.observacoes = document.getElementById('editObs').value;
-            saveData();
-            renderVeiculos();
-            showToast('✅ Veículo atualizado!');
-        }
+function renderVeiculos() {
+    const tbody = document.querySelector('#tabelaVeiculos tbody');
+    if(tbody) {
+        tbody.innerHTML = db.veiculos.map(v => {
+            const tipo = getTipoVeiculo(v.tipoId);
+            return `<tr><td>${v.placa}</td><td>${tipo ? tipo.descricao : '-'}</td><td>${v.proprietario || '-'}</td><td>${v.celular || '-'}</td><td>${isAdmin() ? `<button class="btn-pequeno danger" onclick="deleteItem('veiculo',${v.id})">🗑️</button>` : '-'}</td></tr>`;
+        }).join('');
     }
-    fecharModalEdicao();
-}
-
-function fecharModalEdicao() {
-    document.getElementById('editModal').style.display = 'none';
-    currentEditType = null;
-    currentEditId = null;
+    const datalist = document.getElementById('placaList');
+    if(datalist) { datalist.innerHTML = ''; db.veiculos.forEach(v => datalist.innerHTML += `<option value="${v.placa}">`); }
 }
 
 function renderTiposSeparados() {
     const veiculos = db.tiposVeiculo.filter(t => t.categoria === "veiculo");
     const servicos = db.tiposVeiculo.filter(t => t.categoria === "servico");
     
-    document.getElementById('listaVeiculosTipos').innerHTML = `
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr><th>Descrição</th><th>Valor (R$)</th><th>Comissão (R$)</th><th>Tempo</th><th>Lucro</th><th>Ações</th></tr>
-                </thead>
-                <tbody>
-                    ${veiculos.map(t => {
-                        const lucro = t.valor - t.comissao;
-                        return `<tr>
-                            <td>${t.descricao}</td>
-                            <td><input type="number" value="${t.valor}" step="0.01" onchange="atualizarValor(${t.id}, this.value)" style="width:90px"></td>
-                            <td><input type="number" value="${t.comissao}" step="0.01" onchange="atualizarComissao(${t.id}, this.value)" style="width:90px"></td>
-                            <td>${t.tempo} min</td>
-                            <td style="color:${lucro>=0?'green':'red'}">R$ ${lucro.toFixed(2)}</td>
-                            <td>${isAdmin() ? `<button class="btn-pequeno danger" onclick="deleteTipo(${t.id})">🗑️ Excluir</button>` : '-'}</td>
-                        </tr>`;
-                    }).join('')}
-                </tbody>
-            </table>
-        </div>`;
+    document.getElementById('listaVeiculosTipos').innerHTML = `<div class="table-responsive"><table><thead><tr><th>Categoria/Tipo</th><th>Valor</th><th>Comissão</th><th>Ações</th></tr></thead><tbody>${veiculos.map(t => `<tr><td>${t.descricao}</td><td>R$ ${t.valor.toFixed(2)}</td><td>R$ ${t.comissao.toFixed(2)}</td><td><button class="btn-pequeno danger" onclick="deleteTipo(${t.id})">🗑️</button></td></tr>`).join('')}</tbody></table></div>`;
+    document.getElementById('listaServicosTipos').innerHTML = `<div class="table-responsive"><table><thead><tr><th>Serviço Extra</th><th>Valor</th><th>Comissão</th><th>Ações</th></tr></thead><tbody>${servicos.map(t => `<tr><td>${t.descricao}</td><td>R$ ${t.valor.toFixed(2)}</td><td>R$ ${t.comissao.toFixed(2)}</td><td><button class="btn-pequeno danger" onclick="deleteTipo(${t.id})">🗑️</button></td></tr>`).join('')}</tbody></table></div>`;
 
-    document.getElementById('listaServicosTipos').innerHTML = `
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr><th>Descrição</th><th>Valor (R$)</th><th>Comissão (R$)</th><th>Tempo</th><th>Lucro</th><th>Ações</th></tr>
-                </thead>
-                <tbody>
-                    ${servicos.map(t => {
-                        const lucro = t.valor - t.comissao;
-                        return `<tr>
-                            <td>${t.descricao}</td>
-                            <td><input type="number" value="${t.valor}" step="0.01" onchange="atualizarValor(${t.id}, this.value)" style="width:90px"></td>
-                            <td><input type="number" value="${t.comissao}" step="0.01" onchange="atualizarComissao(${t.id}, this.value)" style="width:90px"></td>
-                            <td>${t.tempo} min</td>
-                            <td style="color:${lucro>=0?'green':'red'}">R$ ${lucro.toFixed(2)}</td>
-                            <td>${isAdmin() ? `<button class="btn-pequeno danger" onclick="deleteTipo(${t.id})">🗑️ Excluir</button>` : '-'}</td>
-                        </tr>`;
-                    }).join('')}
-                </tbody>
-            </table>
-        </div>`;
-
-    const select = document.getElementById('veiculoTipo');
-    if(select) { select.innerHTML = '<option value="">Selecione</option>' + veiculos.map(t => `<option value="${t.id}">${t.descricao}</option>`).join(''); }
-    const selectServico = document.getElementById('lavagemServicoExtra');
-    if(selectServico) { selectServico.innerHTML = '<option value="">Nenhum</option>' + servicos.map(s => `<option value="${s.id}">${s.descricao}</option>`).join(''); }
+    document.getElementById('veiculoTipo').innerHTML = '<option value="">Selecione</option>' + veiculos.map(t => `<option value="${t.id}">${t.descricao}</option>`).join('');
+    document.getElementById('lavagemServicoExtra').innerHTML = '<option value="">Nenhum</option>' + servicos.map(s => `<option value="${s.id}">${s.descricao}</option>`).join('');
 }
 
-function atualizarValor(id, valor) { const tipo = db.tiposVeiculo.find(t => t.id == id); if(tipo) { tipo.valor = parseFloat(valor); saveData(); renderTiposSeparados(); showToast('Valor atualizado!'); } }
-function atualizarComissao(id, valor) { const tipo = db.tiposVeiculo.find(t => t.id == id); if(tipo) { tipo.comissao = parseFloat(valor); saveData(); renderTiposSeparados(); showToast('Comissão atualizada!'); } }
-function deleteTipo(id) { if(!isAdmin()) return; if(confirm('Excluir este tipo?')) { db.tiposVeiculo = db.tiposVeiculo.filter(t => t.id != id); saveData(); renderTiposSeparados(); updateSelects(); showToast('Excluído!'); } }
-function toggleLavador(id) { if(!isAdmin()) return; const lav = db.lavadores.find(l => l.id == id); if(lav) { lav.ativo = !lav.ativo; saveData(); renderLavadores(); updateSelects(); showToast(`Lavador ${lav.ativo?'ativado':'inativado'}`); } }
+function deleteTipo(id) { if(confirm('Excluir este tipo?')) { db.tiposVeiculo = db.tiposVeiculo.filter(t => t.id != id); saveData(); renderTiposSeparados(); } }
+function deleteItem(tipo, id) { if(confirm('Excluir item?')) { if(tipo==='veiculo') db.veiculos=db.veiculos.filter(v=>v.id!=id); if(tipo==='lavador') db.lavadores=db.lavadores.filter(l=>l.id!=id); saveData(); renderVeiculos(); renderLavadores(); } }
 
-function renderVeiculos() {
-    const tbody = document.querySelector('#tabelaVeiculos tbody');
-    if(tbody) {
-        tbody.innerHTML = '';
-        db.veiculos.forEach(v => { const tipo = getTipoVeiculo(v.tipoId); tbody.innerHTML += `<tr>
-            <td>${v.placa}</td>
-            <td>${tipo ? tipo.descricao : '-'}</td>
-            <td>${v.proprietario || '-'}</td>
-            <td>${v.celular || '-'}</td>
-            <td class="acao-botoes">
-                ${isAdmin() ? `<button class="btn-pequeno warning" onclick="abrirEditarVeiculo(${v.id})">✏️ Editar</button>
-                <button class="btn-pequeno danger" onclick="deleteItem('veiculo',${v.id})">🗑️ Excluir</button>` : '-'}
-            </td>
-        </tr>`; });
-    }
-    const datalist = document.getElementById('placaList');
-    if(datalist) { datalist.innerHTML = ''; db.veiculos.forEach(v => { const opt = document.createElement('option'); opt.value = v.placa; datalist.appendChild(opt); }); }
-}
-
-function deleteItem(tipo, id) { if(!isAdmin()) return; if(confirm('Excluir?')) { if(tipo === 'veiculo') db.veiculos = db.veiculos.filter(v => v.id != id); if(tipo === 'lavador') db.lavadores = db.lavadores.filter(l => l.id != id); saveData(); renderVeiculos(); renderLavadores(); showToast('Excluído!'); } }
-
-// ==================== LÓGICA DO BOTÃO DINÂMICO (FLUXO DE STATUS) ====================
-function renderLavagens() { 
+function renderLavagens() {
     document.getElementById('listaLavagens').innerHTML = (db.lavagens || [])
-        .filter(l => l.status !== 'Entregue') // Remove da tela apenas quando for entregue
+        .filter(l => l.status !== 'Entregue')
         .reverse()
         .map(l => {
-            // Se estiver em andamento, o botão vira "Finalizar". Se já estiver Finalizado, vira "Entregar"
             const textoBotao = l.status === 'Em lavagem' ? '✓ Finalizar' : '🎁 Entregar Veículo';
             const novoStatus = l.status === 'Em lavagem' ? 'Finalizado' : 'Entregue';
-            const corBotao = l.status === 'Em lavagem' ? '' : 'background:#4caf50; color:white;';
-
+            const estilo = l.status === 'Em lavagem' ? 'status-em-lavagem' : 'status-finalizado';
             return `<div class="lavagem-item">
                 <div>
-                    <strong>${l.placa}</strong><br>
-                    <small>Status: <span class="status ${l.status === 'Em lavagem' ? 'status-em-lavagem' : 'status-finalizado'}">${l.status}</span></small><br>
-                    <small>R$ ${l.valor.toFixed(2)}</small>
+                    <strong>${l.placa}</strong> - <span class="status ${estilo}">${l.status}</span><br>
+                    <small>Faturamento Estimado: R$ ${(l.faturamento || 0).toFixed(2)}</small>
                 </div>
                 <div>
-                    <button class="btn-pequeno" style="${corBotao}" onclick="updateLavagemStatus(${l.id},'${novoStatus}')">${textoBotao}</button>
-                    <button class="btn-pequeno" onclick="sendWhatsApp('${l.placa}')">📱 WhatsApp</button>
+                    <button class="btn-pequeno success" onclick="updateLavagemStatus(${l.id},'${novoStatus}')">${textoBotao}</button>
                 </div>
             </div>`;
-        }).join('') || '<p>Nenhuma lavagem pendente no pátio</p>'; 
+        }).join('') || '<p style="color:#777; padding:10px;">Pátio vazio no momento.</p>';
 }
 
-function updateLavagemStatus(id, status) { 
-    const l = db.lavagens.find(l => l.id == id); 
-    if(l) { 
-        l.status = status; 
-        saveData(); 
-        renderDashboard(); 
-        renderLavagens(); 
-        showToast(`Veículo alterado para: ${status}`); 
-    } 
+function updateLavagemStatus(id, status) {
+    const l = db.lavagens.find(l => l.id == id);
+    if(l) {
+        l.status = status;
+        // Atualiza a data do evento para o momento exato em que ele vira "Entregue" (garante precisão no relatório)
+        if(status === 'Entregue') {
+            l.data = new Date().toISOString();
+        }
+        saveData();
+        renderDashboard();
+        renderLavagens();
+        showToast(`Veículo atualizado para: ${status}`);
+    }
 }
 
-function sendWhatsApp(placa) { const v = getVeiculoByPlaca(placa); if(v && v.celular) window.open(`https://wa.me/55${v.celular.replace(/\D/g,'')}?text=Seu%20veículo%20está%20pronto!%20Pode%20vir%20buscar.`, '_blank'); else showToast('Número não cadastrado', 'error'); }
-function showVeiculoInfo(placa) { const v = getVeiculoByPlaca(placa); const tipo = v ? getTipoVeiculo(v.tipoId) : null; document.getElementById('infoVeiculo').innerHTML = v ? `<strong>👤 ${v.proprietario || '-'}</strong><br>📱 ${v.celular || '-'}<br>🚗 ${tipo ? tipo.descricao : '-'}<br>💰 R$ ${tipo ? tipo.valor.toFixed(2) : '-'}` : '<em>⚠️ Veículo não cadastrado</em>'; }
-function updateSelects() { const select = document.getElementById('lavagemLavador'); if(select) { select.innerHTML = '<option value="">Selecione</option>' + (db.lavadores || []).filter(l => l.active || l.ativo).map(l => `<option value="${l.id}">${l.nome}</option>`).join(''); } verificarLavadoresAtivos(); }
-
-// ==================== FILTRO DE RELATÓRIO CORRIGIDO ====================
-function getLavagensFiltradasRelatorio() { 
-    // Agora o relatório busca os dados das lavagens que foram dadas como "Entregue" no pátio
-    let l = (db.lavagens || []).filter(l => l.status === 'Entregue'); 
-    if(currentRelatorioFilter.inicio || currentRelatorioFilter.fim) l = filtrarLavagensPorPeriodo(l, currentRelatorioFilter.inicio, currentRelatorioFilter.fim); 
-    return l; 
+function showVeiculoInfo(placa) {
+    const v = getVeiculoByPlaca(placa);
+    if(v) {
+        const tipo = getTipoVeiculo(v.tipoId);
+        document.getElementById('infoVeiculo').innerHTML = `👤 <strong>Proprietário:</strong> ${v.proprietario || 'Não Informado'} | Categoria: ${tipo ? tipo.descricao : '-'}`;
+    } else {
+        document.getElementById('infoVeiculo').innerHTML = '<em>⚠️ Placa nova detectada. O sistema abrirá o cadastro rápido ao salvar.</em>';
+    }
 }
 
-function showRelatorioDiario() { const l = getLavagensFiltradasRelatorio(); const total = l.reduce((s,item) => s + item.valor,0); document.getElementById('relatorioConteudo').innerHTML = `<h4>Relatório Diário</h4><p>Total de Entregas: ${l.length}</p><p>Faturamento: R$ ${total.toFixed(2)}</p>`; }
-function showRelatorioLavador() { const l = getLavagensFiltradasRelatorio(); const stats = {}; l.forEach(item => { if(!stats[item.lavadorId]) stats[item.lavadorId] = { qtd:0, valor:0 }; stats[item.lavadorId].qtd++; stats[item.lavadorId].valor += item.valor; }); let html = '<h4>Por Lavador</h4><div class="table-responsive"><table><thead><tr><th>Lavador</th><th>Qtd</th><th>Valor</th></tr></thead><tbody>'; for(let id in stats) { const lav = getLavador(parseInt(id)); html += `<tr><td>${lav ? lav.nome : '-'}</td><td>${stats[id].qtd}</td><td>R$ ${stats[id].valor.toFixed(2)}</td></tr>`; } html += '</tbody></table></div>'; document.getElementById('relatorioConteudo').innerHTML = html; }
-function showRelatorioTipo() { const l = getLavagensFiltradasRelatorio(); const stats = {}; l.forEach(item => { if(!stats[item.tipoId]) stats[item.tipoId] = { qtd:0, valor:0 }; stats[item.tipoId].qtd++; stats[item.tipoId].valor += item.valor; }); let html = '<h4>Por Tipo</h4><div class="table-responsive"><table><thead><tr><th>Tipo</th><th>Qtd</th><th>Valor</th></tr></thead><tbody>'; for(let id in stats) { const tipo = getTipoVeiculo(parseInt(id)); html += `<tr><td>${tipo ? tipo.descricao : '-'}</td><td>${stats[id].qtd}</td><td>R$ ${stats[id].valor.toFixed(2)}</td></tr>`; } html += '</tbody></table></div>'; document.getElementById('relatorioConteudo').innerHTML = html; }
-function showRelatorioGeral() { const l = getLavagensFiltradasRelatorio(); const total = l.length; const fat = l.reduce((s,item) => s + item.valor,0); document.getElementById('relatorioConteudo').innerHTML = `<h4>Relatório Geral</h4><p>Total de Veículos Entregues: ${total}</p><p>Faturamento Realizado: R$ ${fat.toFixed(2)}</p>`; }
-function exportarXLSXRelatorio() { const l = getLavagensFiltradasRelatorio(); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(l.map(item => ({ Data: new Date(item.data).toLocaleString(), Placa: item.placa, Valor: item.valor }))), 'Relatório'); XLSX.writeFile(wb, `relatorio_${new Date().toISOString().split('T')[0]}.xlsx`); showToast('Exportado!'); }
+// MOTOR DE DATA DOS RELATÓRIOS (CORRIGIDO PARA BUSCAR APENAS ENTREGUES)
+function getLavagensFiltradasRelatorio() {
+    let l = (db.lavagens || []).filter(l => l.status === 'Entregue');
+    if(currentRelatorioFilter.inicio || currentRelatorioFilter.fim) {
+        l = filtrarLavagensPorData(l, currentRelatorioFilter.inicio, currentRelatorioFilter.fim);
+    }
+    return l;
+}
 
-// ==================== INICIALIZAÇÃO ====================
-initLicense();
+// 1. Relatório Diário (Resumo Executivo)
+function showRelatorioDiario() {
+    const dados = getLavagensFiltradasRelatorio();
+    const totalEntregas = dados.length;
+    const faturamentoTotal = dados.reduce((s, l) => s + (l.faturamento || 0), 0);
+    const totalComissoes = dados.reduce((s, l) => s + (l.comissaoTotal || 0), 0);
+    const liquido = faturamentoTotal - totalComissoes;
+
+    document.getElementById('relatorioConteudo').innerHTML = `
+        <div class="relatorio-bloco">
+            <h4>1. Relatório Diário (Resumo Executivo)</h4>
+            <div class="relatorio-linha"><span>Total de Entregas:</span> <span>${totalEntregas}</span></div>
+            <div class="relatorio-linha"><span>Faturamento:</span> <span>R$ ${faturamentoTotal.toFixed(2)}</span></div>
+            <div class="relatorio-linha"><span>Comissão do Lavador:</span> <span>R$ ${totalComissoes.toFixed(2)}</span></div>
+            <div class="relatorio-linha"><span>Líquido:</span> <span>R$ ${liquido.toFixed(2)}</span></div>
+        </div>
+    `;
+}
+
+// 2. Relatório por Lavador
+function showRelatorioLavador() {
+    const dados = getLavagensFiltradasRelatorio();
+    let html = '<div class="relatorio-bloco"><h4>2. Relatório Por Lavador</h4>';
+    
+    if(dados.length === 0) {
+        html += '<p style="text-align:center; color:#777; padding:10px;">Nenhum dado encontrado para o período selecionado.</p>';
+    } else {
+        dados.forEach(l => {
+            const lavador = getLavador(l.lavadorId);
+            const nomeLavador = lavador ? lavador.nome : 'Desconhecido';
+            const nomeServico = l.servicoExtraDesc !== 'Nenhum' ? `${l.tipoDesc} + ${l.servicoExtraDesc}` : l.tipoDesc;
+            
+            html += `
+                <div style="border-bottom:1px solid #eee; margin-bottom:10px; padding-bottom:5px;">
+                    <div class="relatorio-linha"><span>Data:</span> <span>${new Date(l.data).toLocaleDateString()}</span></div>
+                    <div class="relatorio-linha"><span>Lavador:</span> <span>${nomeLavador}</span></div>
+                    <div class="relatorio-linha"><span>Serviço:</span> <span>${nomeServico}</span></div>
+                    <div class="relatorio-linha"><span>Comissão:</span> <span>R$ ${l.comissaoTotal.toFixed(2)}</span></div>
+                </div>
+            `;
+        });
+    }
+    html += '</div>';
+    document.getElementById('relatorioConteudo').innerHTML = html;
+}
+
+// 3. Relatório por Tipo
+function showRelatorioTipo() {
+    const dados = getLavagensFiltradasRelatorio();
+    let html = '<div class="relatorio-bloco"><h4>3. Relatório Por Tipo</h4>';
+    
+    if(dados.length === 0) {
+        html += '<p style="text-align:center; color:#777; padding:10px;">Nenhum dado encontrado para o período selecionado.</p>';
+    } else {
+        dados.forEach(l => {
+            const lucroLimpo = l.faturamento - l.comissaoTotal;
+            html += `
+                <div style="border-bottom:1px solid #eee; margin-bottom:10px; padding-bottom:5px;">
+                    <div class="relatorio-linha"><span>Data:</span> <span>${new Date(l.data).toLocaleDateString()}</span></div>
+                    <div class="relatorio-linha"><span>Tipo:</span> <span>${l.tipoDesc || 'Padrão'}</span></div>
+                    <div class="relatorio-linha"><span>Serviço:</span> <span>${l.servicoExtraDesc || 'Nenhum'}</span></div>
+                    <div class="relatorio-linha"><span>Faturamento:</span> <span>R$ ${l.faturamento.toFixed(2)}</span></div>
+                    <div class="relatorio-linha"><span>Comissão:</span> <span>R$ ${l.comissaoTotal.toFixed(2)}</span></div>
+                    <div class="relatorio-linha"><span>Líquido:</span> <span style="color:green;">R$ ${lucroLimpo.toFixed(2)}</span></div>
+                </div>
+            `;
+        });
+    }
+    html += '</div>';
+    document.getElementById('relatorioConteudo').innerHTML = html;
+}
+
+// 4. Relatório Geral (Formato de Lista Tabular)
+function showRelatorioGeral() {
+    const dados = getLavagensFiltradasRelatorio();
+    let html = `
+        <div class="relatorio-bloco">
+            <h4>4. Relatório Geral (Formato de Lista Tabular)</h4>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th>Valor (Tipo)</th>
+                            <th>Serviço</th>
+                            <th>Valor (Serviço)</th>
+                            <th>Lavador</th>
+                            <th>Comissão</th>
+                            <th>Faturamento</th>
+                            <th>Líquido</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    `;
+    
+    if(dados.length === 0) {
+        html += '<tr><td colspan="9" style="text-align:center; color:#777;">Nenhum registro entregue encontrado.</td></tr>';
+    } else {
+        dados.forEach(l => {
+            const lavador = getLavador(l.lavadorId);
+            const nomeLavador = lavador ? lavador.nome : '-';
+            const liquido = l.faturamento - l.comissaoTotal;
+            
+            html += `
+                <tr>
+                    <td>${new Date(l.data).toLocaleDateString()}</td>
+                    <td>${l.tipoDesc}</td>
+                    <td>R$ ${(l.tipoValor || 0).toFixed(2)}</td>
+                    <td>${l.servicoExtraDesc}</td>
+                    <td>R$ ${(l.servicoExtraValor || 0).toFixed(2)}</td>
+                    <td>${nomeLavador}</td>
+                    <td>R$ ${l.comissaoTotal.toFixed(2)}</td>
+                    <td><strong>R$ ${l.faturamento.toFixed(2)}</strong></td>
+                    <td style="color:green; font-weight:bold;">R$ ${liquido.toFixed(2)}</td>
+                </tr>
+            `;
+        });
+    }
+    
+    html += `
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+    document.getElementById('relatorioConteudo').innerHTML = html;
+}
+
+// Exportar Tabela Geral para Excel (.XLSX)
+function exportarXLSXRelatorio() {
+    const dados = getLavagensFiltradasRelatorio();
+    if(dados.length === 0) { showToast('Sem dados para exportar!', 'error'); return; }
+    
+    const linhasXlsx = dados.map(l => {
+        const lavador = getLavador(l.lavadorId);
+        return {
+            'Data': new Date(l.data).toLocaleDateString(),
+            'Tipo': l.tipoDesc,
+            'Valor (Tipo)': l.tipoValor || 0,
+            'Serviço': l.servicoExtraDesc,
+            'Valor (Serviço)': l.servicoExtraValor || 0,
+            'Lavador': lavador ? lavador.nome : '-',
+            'Comissão': l.comissaoTotal,
+            'Faturamento': l.faturamento,
+            'Líquido': l.faturamento - l.comissaoTotal
+        };
+    });
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(linhasXlsx);
+    XLSX.utils.book_append_sheet(wb, ws, 'Relatório Geral');
+    XLSX.writeFile(wb, `Relatorio_Consolidado_${new Date().toISOString().split('T')[0]}.xlsx`);
+    showToast('💾 Arquivo Excel Gerado!');
+}
+
+// CONFIGURAÇÕES DE BACKUP GERAL (SISTEMA)
+document.getElementById('btnBackup').onclick = function() {
+    const wb = XLSX.utils.book_new();
+    const wsLavadores = XLSX.utils.json_to_sheet(db.lavadores);
+    const wsVeiculos = XLSX.utils.json_to_sheet(db.veiculos);
+    const wsTipos = XLSX.utils.json_to_sheet(db.tiposVeiculo);
+    const wsLavagens = XLSX.utils.json_to_sheet(db.lavagens);
+    
+    XLSX.utils.book_append_sheet(wb, wsLavadores, 'Lavadores');
+    XLSX.utils.book_append_sheet(wb, wsVeiculos, 'Veiculos');
+    XLSX.utils.book_append_sheet(wb, wsTipos, 'Tipos');
+    XLSX.utils.book_append_sheet(wb, wsLavagens, 'Lavagens');
+    
+    XLSX.writeFile(wb, 'SISTEMA_JATAO_BACKUP.xlsx');
+    showToast('Backup do sistema exportado!');
+};
+
+document.getElementById('btnRestore').onclick = () => document.getElementById('fileImport').click();
+document.getElementById('fileImport').onchange = function(e) {
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, {type: 'array'});
+        
+        try {
+            if(workbook.Sheets['Lavadores']) db.lavadores = XLSX.utils.sheet_to_json(workbook.Sheets['Lavadores']);
+            if(workbook.Sheets['Veiculos']) db.veiculos = XLSX.utils.sheet_to_json(workbook.Sheets['Veiculos']);
+            if(workbook.Sheets['Tipos']) db.tiposVeiculo = XLSX.utils.sheet_to_json(workbook.Sheets['Tipos']);
+            if(workbook.Sheets['Lavagens']) db.lavagens = XLSX.utils.sheet_to_json(workbook.Sheets['Lavagens']);
+            
+            saveData();
+            showToast('Backup restaurado com sucesso!');
+            renderDashboard();
+        } catch(err) {
+            showToast('Erro ao ler arquivo de backup.', 'error');
+        }
+    };
+    reader.readAsArrayBuffer(file);
+};
+
+// INICIALIZADORES DE EVENTOS
 loadData();
-if(!isTrialValid()) { document.getElementById('expiredContainer').style.display = 'flex'; document.getElementById('loginContainer').style.display = 'none'; } else { updateTrialDisplay(); }
+initLicense();
+updateTrialDisplay();
 
 document.getElementById('btnLogin').onclick = function() {
-    const user = document.getElementById('loginUser').value;
-    const pass = document.getElementById('loginPass').value;
-    if(!isTrialValid()) { showToast('Teste expirado!', 'error'); return; }
-    if(login(user, pass)) {
+    const u = document.getElementById('loginUser').value;
+    const s = document.getElementById('loginPass').value;
+    if(login(u, s)) {
         document.getElementById('loginContainer').style.display = 'none';
         document.getElementById('appContainer').style.display = 'block';
         document.getElementById('userName').innerText = db.currentUser.nome;
         document.getElementById('userLevel').innerText = db.currentUser.nivel;
-        if(!isAdmin()) { document.querySelectorAll('#btnCadastrarLavador, #btnCadastrarVeiculo, #btnCadastrarTipo').forEach(btn => btn.disabled = true); }
-        renderDashboard(); renderLavadores(); renderTiposSeparados(); renderVeiculos(); renderLavagens(); updateSelects(); updateTrialDisplay();
-        showToast(`Bem-vindo, ${db.currentUser.nome}!`);
-    } else { showToast('Usuário/senha inválidos! Use admin/admin123', 'error'); }
+        renderDashboard(); renderLavadores(); renderTiposSeparados(); renderVeiculos(); renderLavagens(); updateTrialDisplay();
+        showToast('Login efetuado!');
+    } else {
+        showToast('Usuário ou senha incorretos!', 'error');
+    }
 };
-document.getElementById('btnRegistrar').onclick = () => { if(!isTrialValid()) return; const n = prompt('Nome:'); const u = prompt('Usuário:'); const s = prompt('Senha:'); if(n && u && s) registerUser(n,u,s); };
-document.getElementById('btnContatoLogin').onclick = entrarEmContato;
-document.getElementById('btnContatoFlutuante').onclick = entrarEmContato;
-document.getElementById('logoutLink').onclick = (e) => { e.preventDefault(); logout(); };
-document.getElementById('btnBackup').onclick = fazerBackupXLSX;
-document.getElementById('btnRestore').onclick = () => document.getElementById('fileImport').click();
-document.getElementById('fileImport').onchange = (e) => { if(e.target.files[0]) importarBackupXLSX(e.target.files[0]); e.target.value = ''; };
-document.getElementById('aplicarFiltroDashboard').onclick = () => { currentDashboardFilter.inicio = document.getElementById('dashboardDataInicio').value; currentDashboardFilter.fim = document.getElementById('dashboardDataFim').value; renderDashboard(); showToast('Filtro aplicado!'); };
-document.getElementById('limparFiltroDashboard').onclick = () => { currentDashboardFilter = { inicio: null, fim: null }; document.getElementById('dashboardDataInicio').value = ''; document.getElementById('dashboardDataFim').value = ''; renderDashboard(); showToast('Filtro removido!'); };
-document.getElementById('aplicarFiltroRelatorio').onclick = () => { currentRelatorioFilter.inicio = document.getElementById('relatorioDataInicio').value; currentRelatorioFilter.fim = document.getElementById('relatorioDataFim').value; showRelatorioGeral(); showToast('Filtro aplicado!'); };
-document.getElementById('limparFiltroRelatorio').onclick = () => { currentRelatorioFilter = { inicio: null, fim: null }; document.getElementById('relatorioDataInicio').value = ''; document.getElementById('relatorioDataFim').value = ''; showRelatorioGeral(); showToast('Filtro removido!'); };
+
+document.getElementById('formLavagem').onsubmit = function(e) {
+    e.preventDefault();
+    const placa = document.getElementById('lavagemPlaca').value.toUpperCase();
+    let veiculo = getVeiculoByPlaca(placa);
+    
+    if(!veiculo) {
+        abrirCadastroVeiculoModalLavagem(placa);
+        return;
+    }
+
+    const categoriaVeiculo = getTipoVeiculo(veiculo.tipoId);
+    if(!categoriaVeiculo) { showToast('Erro na categoria do veículo', 'error'); return; }
+
+    let tValor = categoriaVeiculo.valor;
+    let tComissao = categoriaVeiculo.comissao;
+    
+    let sDesc = 'Nenhum';
+    let sValor = 0;
+    let sComissao = 0;
+
+    const sSelect = document.getElementById('lavagemServicoExtra').value;
+    if(sSelect) {
+        const extra = getTipoVeiculo(parseInt(sSelect));
+        if(extra) {
+            sDesc = extra.descricao;
+            sValor = extra.valor;
+            sComissao = extra.comissao;
+        }
+    }
+
+    db.lavagens.push({
+        id: Date.now(),
+        data: new Date().toISOString(),
+        lavadorId: parseInt(document.getElementById('lavagemLavador').value),
+        placa: placa,
+        tipoId: veiculo.tipoId,
+        tipoDesc: categoriaVeiculo.descricao,
+        tipoValor: tValor,
+        servicoExtraDesc: sDesc,
+        servicoExtraValor: sValor,
+        comissaoTotal: tComissao + sComissao,
+        faturamento: tValor + sValor,
+        status: document.getElementById('lavagemStatus').value,
+        observacoes: document.getElementById('lavagemObs').value
+    });
+
+    saveData();
+    renderDashboard();
+    renderLavagens();
+    document.getElementById('formLavagem').reset();
+    document.getElementById('infoVeiculo').innerHTML = '';
+    showToast('Lavagem adicionada ao pátio!');
+};
+
+document.getElementById('formCadastroRapido').onsubmit = function(e) {
+    e.preventDefault();
+    const placa = document.getElementById('rapidoPlaca').value.toUpperCase();
+    db.veiculos.push({
+        id: Date.now(),
+        placa: placa,
+        tipoId: parseInt(document.getElementById('rapidoTipo').value),
+        proprietario: document.getElementById('rapidoProprietario').value,
+        celular: ''
+    });
+    saveData();
+    renderVeiculos();
+    document.getElementById('cadastroVeiculoModal').style.display = 'none';
+    document.getElementById('lavagemPlaca').value = placa;
+    showVeiculoInfo(placa);
+    showToast('Veículo Cadastrado!');
+};
+
+document.getElementById('formCadastroRapidoLavador').onsubmit = function(e) {
+    e.preventDefault();
+    db.lavadores.push({
+        id: Date.now(),
+        nome: document.getElementById('rapidoLavadorNome').value,
+        celular: document.getElementById('rapidoLavadorCelular').value,
+        ativo: true
+    });
+    saveData();
+    renderLavadores();
+    document.getElementById('cadastroLavadorModal').style.display = 'none';
+    document.getElementById('formCadastroRapidoLavador').reset();
+    showToast('Lavador Cadastrado!');
+};
+
+document.getElementById('formLavador').onsubmit = function(e) {
+    e.preventDefault();
+    db.lavadores.push({
+        id: Date.now(),
+        nome: document.getElementById('lavadorNome').value,
+        celular: document.getElementById('lavadorCelular').value,
+        ativo: true
+    });
+    saveData();
+    renderLavadores();
+    this.reset();
+    showToast('Lavador Cadastrado!');
+};
+
+document.getElementById('formVeiculo').onsubmit = function(e) {
+    e.preventDefault();
+    db.veiculos.push({
+        id: Date.now(),
+        placa: document.getElementById('veiculoPlaca').value.toUpperCase(),
+        tipoId: parseInt(document.getElementById('veiculoTipo').value),
+        proprietario: document.getElementById('veiculoProprietario').value,
+        celular: document.getElementById('veiculoCelular').value
+    });
+    saveData();
+    renderVeiculos();
+    this.reset();
+    showToast('Veículo Cadastrado!');
+};
+
+document.getElementById('formTipo').onsubmit = function(e) {
+    e.preventDefault();
+    db.tiposVeiculo.push({
+        id: Date.now(),
+        categoria: document.getElementById('tipoCategoria').value,
+        descricao: document.getElementById('tipoDescricao').value,
+        valor: parseFloat(document.getElementById('tipoValor').value),
+        comissao: parseFloat(document.getElementById('tipoComissao').value),
+        tempo: parseInt(document.getElementById('tipoTempo').value)
+    });
+    saveData();
+    renderTiposSeparados();
+    this.reset();
+    showToast('Adicionado com sucesso!');
+};
+
+// ACOES DOS FILTROS DO RELATORIO
+document.getElementById('aplicarFiltroRelatorio').onclick = () => {
+    currentRelatorioFilter.inicio = document.getElementById('relatorioDataInicio').value;
+    currentRelatorioFilter.fim = document.getElementById('relatorioDataFim').value;
+    showRelatorioGeral();
+    showToast('Filtro de Relatório Ativado!');
+};
+document.getElementById('limparFiltroRelatorio').onclick = () => {
+    currentRelatorioFilter = { inicio: null, fim: null };
+    document.getElementById('relatorioDataInicio').value = '';
+    document.getElementById('relatorioDataFim').value = '';
+    showRelatorioGeral();
+};
+
+// ACOES DOS FILTROS DO DASHBOARD
+document.getElementById('aplicarFiltroDashboard').onclick = () => {
+    currentDashboardFilter.inicio = document.getElementById('dashboardDataInicio').value;
+    currentDashboardFilter.fim = document.getElementById('dashboardDataFim').value;
+    renderDashboard();
+    showToast('Filtro do Dashboard Ativado!');
+};
+document.getElementById('limparFiltroDashboard').onclick = () => {
+    currentDashboardFilter = { inicio: null, fim: null };
+    document.getElementById('dashboardDataInicio').value = '';
+    document.getElementById('dashboardDataFim').value = '';
+    renderDashboard();
+};
+
+// BIND DOS BOTOES DE MODELO DE RELATORIOS
 document.getElementById('btnRelDiario').onclick = showRelatorioDiario;
 document.getElementById('btnRelLavador').onclick = showRelatorioLavador;
 document.getElementById('btnRelTipo').onclick = showRelatorioTipo;
 document.getElementById('btnRelGeral').onclick = showRelatorioGeral;
 document.getElementById('btnExportar').onclick = exportarXLSXRelatorio;
-document.getElementById('formLavador').onsubmit = (e) => { e.preventDefault(); if(!isAdmin()) return; db.lavadores.push({ id: Date.now(), nome: document.getElementById('lavadorNome').value, celular: document.getElementById('lavadorCelular').value, ativo: true }); saveData(); renderLavadores(); updateSelects(); document.getElementById('formLavador').reset(); showToast('Lavador cadastrado!'); };
-document.getElementById('formTipo').onsubmit = (e) => { e.preventDefault(); if(!isAdmin()) return; db.tiposVeiculo.push({ id: Date.now(), categoria: document.getElementById('tipoCategoria').value, descricao: document.getElementById('tipoDescricao').value, valor: parseFloat(document.getElementById('tipoValor').value), comissao: parseFloat(document.getElementById('tipoComissao').value), tempo: parseInt(document.getElementById('tipoTempo').value) }); saveData(); renderTiposSeparados(); document.getElementById('formTipo').reset(); showToast('Tipo cadastrado!'); };
-document.getElementById('formVeiculo').onsubmit = (e) => { e.preventDefault(); if(!isAdmin()) return; const placa = document.getElementById('veiculoPlaca').value.toUpperCase(); if(getVeiculoByPlaca(placa)) { showToast('Veículo já existe!', 'error'); return; } db.veiculos.push({ id: Date.now(), placa: placa, tipoId: parseInt(document.getElementById('veiculoTipo').value), proprietario: document.getElementById('veiculoProprietario').value, celular: document.getElementById('veiculoCelular').value, observacoes: document.getElementById('veiculoObs').value }); saveData(); renderVeiculos(); document.getElementById('formVeiculo').reset(); showToast('Veículo cadastrado!'); };
-document.getElementById('formLavagem').onsubmit = (e) => { e.preventDefault(); const placa = document.getElementById('lavagemPlaca').value.toUpperCase(); let veiculo = getVeiculoByPlaca(placa); if(!veiculo) { abrirCadastroVeiculoModalLavagem(placa); return; } const tipo = getTipoVeiculo(veiculo.tipoId); if(!tipo) { showToast('Tipo não encontrado!', 'error'); return; } let valor = tipo.valor; const servicoSelect = document.getElementById('lavagemServicoExtra'); if(servicoSelect && servicoSelect.value) { const servico = getTipoVeiculo(parseInt(servicoSelect.value)); if(servico) valor += servico.valor; } db.lavagens.push({ id: Date.now(), data: new Date().toISOString(), lavadorId: parseInt(document.getElementById('lavagemLavador').value), placa: placa, tipoId: veiculo.tipoId, valor: valor, comissao: tipo.comissao, status: document.getElementById('lavagemStatus').value, observacoes: document.getElementById('lavagemObs').value }); saveData(); renderDashboard(); renderLavagens(); document.getElementById('formLavagem').reset(); document.getElementById('infoVeiculo').innerHTML = ''; showToast('Lavagem registrada!'); };
+
 document.getElementById('lavagemPlaca').oninput = (e) => showVeiculoInfo(e.target.value.toUpperCase());
-document.getElementById('formCadastroRapido').onsubmit = (e) => { e.preventDefault(); const placa = document.getElementById('rapidoPlaca').value.toUpperCase(); const tipoId = parseInt(document.getElementById('rapidoTipo').value); db.veiculos.push({ id: Date.now(), placa: placa, tipoId: tipoId, proprietario: document.getElementById('rapidoProprietario').value, celular: document.getElementById('rapidoCelular').value }); saveData(); renderVeiculos(); document.getElementById('cadastroVeiculoModal').style.display = 'none'; document.getElementById('lavagemPlaca').value = placa; showVeiculoInfo(placa); showToast('Veículo cadastrado!'); };
-document.getElementById('formCadastroRapidoLavador').onsubmit = (e) => { e.preventDefault(); const nome = document.getElementById('rapidoLavadorNome').value; db.lavadores.push({ id: Date.now(), nome: nome, celular: document.getElementById('rapidoLavadorCelular').value, ativo: true }); saveData(); renderLavadores(); updateSelects(); document.getElementById('cadastroLavadorModal').style.display = 'none'; document.getElementById('formCadastroRapidoLavador').reset(); const novo = db.lavadores[db.lavadores.length-1]; if(novo) document.getElementById('lavagemLavador').value = novo.id; showToast('Lavador cadastrado!'); };
 document.getElementById('fecharModalVeiculo').onclick = () => document.getElementById('cadastroVeiculoModal').style.display = 'none';
 document.getElementById('fecharModalLavador').onclick = () => document.getElementById('cadastroLavadorModal').style.display = 'none';
-document.getElementById('closeTrialModal').onclick = () => document.getElementById('trialModal').style.display = 'none';
-document.getElementById('copyDeviceIdBtn').onclick = () => { navigator.clipboard.writeText(getDeviceId()); showToast('ID copiado!'); };
-document.getElementById('btnContatoEmergencial').onclick = entrarEmContato;
-document.getElementById('btnAtivarLicenca').onclick = () => document.getElementById('ativarModal').style.display = 'block';
-document.getElementById('confirmarAtivacao').onclick = () => { const chave = document.getElementById('chaveAtivacao').value.toUpperCase(); ativarLicenca(chave); };
-document.getElementById('fecharAtivacao').onclick = () => { document.getElementById('ativarModal').style.display = 'none'; document.getElementById('chaveAtivacao').value = ''; };
-document.getElementById('saveEdit').onclick = salvarEdicao;
-document.getElementById('closeModal').onclick = fecharModalEdicao;
-document.querySelectorAll('.menu-item').forEach(item => { item.onclick = function() { const menu = this.dataset.menu; document.querySelectorAll('.container').forEach(c => c.classList.remove('active')); document.getElementById(`${menu}Container`).classList.add('active'); document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active')); this.classList.add('active'); if(menu === 'dashboard') renderDashboard(); if(menu === 'lavadores') renderLavadores(); if(menu === 'veiculos') renderVeiculos(); if(menu === 'tipos') renderTiposSeparados(); if(menu === 'lavagens') renderLavagens(); }; });
+document.getElementById('logoutLink').onclick = logout;
+document.getElementById('btnContatoFlutuante').onclick = () => window.open('https://wa.me/5592988036775', '_blank');
+document.getElementById('btnContatoLogin').onclick = () => window.open('https://wa.me/5592988036775', '_blank');
 
-window.deleteItem = deleteItem;
-window.toggleLavador = toggleLavador;
-window.updateLavagemStatus = updateLavagemStatus;
-window.sendWhatsApp = sendWhatsApp;
-window.showTrialInfo = showTrialInfo;
-window.abrirCadastroLavadorModalLavagem = abrirCadastroLavadorModalLavagem;
-window.abrirCadastroVeiculoModalLavagem = abrirCadastroVeiculoModalLavagem;
-window.atualizarValor = atualizarValor;
-window.atualizarComissao = atualizarComissao;
-window.deleteTipo = deleteTipo;
-window.abrirEditarLavador = abrirEditarLavador;
-window.abrirEditarVeiculo = abrirEditarVeiculo;
+// MENU NAVEGAÇÃO INTERNA
+document.querySelectorAll('.bottom-menu .menu-item').forEach(item => {
+    item.onclick = function() {
+        const menu = this.dataset.menu;
+        document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
+        document.getElementById(`${menu}Container`).classList.add('active');
+        document.querySelectorAll('.bottom-menu .menu-item').forEach(mi => mi.classList.remove('active'));
+        this.classList.add('active');
+        
+        if(menu === 'dashboard') renderDashboard();
+        if(menu === 'lavadores') renderLavadores();
+        if(menu === 'veiculos') renderVeiculos();
+        if(menu === 'tipos') renderTiposSeparados();
+        if(menu === 'lavagens') { renderLavagens(); document.getElementById('lavagemLavador').innerHTML = '<option value="">Selecionar</option>' + db.lavadores.filter(l=>l.active || l.ativo).map(l=>`<option value="${l.id}">${l.nome}</option>`).join(''); verificarLavadoresAtivos(); }
+    };
+});
 </script>
 </body>
 </html>
