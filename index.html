@@ -449,21 +449,36 @@ function showTrialInfo() {
     document.getElementById('copyIdBtn').onclick = () => { navigator.clipboard.writeText(deviceId); showToast('ID Copiado!'); };
 }
 
-// MODELO DE DADOS PRINCIPAL
+// MODELO DE DADOS PRINCIPAL COM VALORES DA TABELA
 let db = { users: [], lavadores: [], tiposVeiculo: [], veiculos: [], lavagens: [], currentUser: null };
 let currentDashboardFilter = { inicio: null, fim: null };
 let currentRelatorioFilter = { inicio: null, fim: null };
 
 function loadData() {
     const saved = localStorage.getItem('jataoGuardiaoDB');
-    if(saved) { db = JSON.parse(saved); }
+    if(saved) { 
+        db = JSON.parse(saved); 
+    }
     else {
         db.users = [{ id: 1, nome: "Administrador", usuario: "admin", senha: "admin123", nivel: "Administrador" }];
+        // VALORES ATUALIZADOS CONFORME A TABELA FORNECIDA
         db.tiposVeiculo = [
-            { id: 1, categoria: "veiculo", descricao: "Padrão", valor: 60.00, comissao: 18.00, tempo: 30 },
-            { id: 2, categoria: "veiculo", descricao: "Estética", valor: 150.00, comissao: 45.00, tempo: 60 },
-            { id: 3, categoria: "servico", descricao: "Polimento", valor: 150.00, comissao: 45.00, tempo: 45 },
-            { id: 4, categoria: "servico", descricao: "Lavagem Simples", valor: 60.00, comissao: 18.00, tempo: 30 }
+            // Veículos
+            { id: 1, categoria: "veiculo", descricao: "Moto", valor: 10.00, comissao: 1.00, tempo: 20 },
+            { id: 2, categoria: "veiculo", descricao: "Carro Pequeno", valor: 10.00, comissao: 1.00, tempo: 30 },
+            { id: 3, categoria: "veiculo", descricao: "Carro Grande", valor: 10.00, comissao: 1.00, tempo: 45 },
+            { id: 4, categoria: "veiculo", descricao: "Pick-up", valor: 10.00, comissao: 1.00, tempo: 60 },
+            { id: 5, categoria: "veiculo", descricao: "Van", valor: 15.00, comissao: 1.00, tempo: 75 },
+            { id: 6, categoria: "veiculo", descricao: "Caminhão", valor: 19.00, comissao: 1.00, tempo: 90 },
+            { id: 7, categoria: "veiculo", descricao: "Ônibus", valor: 100.00, comissao: 1.00, tempo: 120 },
+            // Serviços Extras
+            { id: 8, categoria: "servico", descricao: "Cera", valor: 10.00, comissao: 1.00, tempo: 15 },
+            { id: 9, categoria: "servico", descricao: "Polimento", valor: 13.00, comissao: 1.00, tempo: 30 },
+            { id: 10, categoria: "servico", descricao: "Polimento Superior", valor: 16.00, comissao: 1.00, tempo: 45 },
+            { id: 11, categoria: "servico", descricao: "Lavagem detalhada", valor: 10.00, comissao: 1.00, tempo: 20 },
+            { id: 12, categoria: "servico", descricao: "Lavagem premium", valor: 10.00, comissao: 1.00, tempo: 25 },
+            { id: 13, categoria: "servico", descricao: "Lavagem interna", valor: 25.00, comissao: 1.00, tempo: 20 },
+            { id: 14, categoria: "servico", descricao: "Lavagem completa", valor: 30.00, comissao: 1.00, tempo: 40 }
         ];
         db.lavadores = [{ id: 1, nome: "Carlos", celular: "92999999999", ativo: true }, { id: 2, nome: "Marcos", celular: "92988888888", ativo: true }];
         db.veiculos = [];
@@ -498,12 +513,9 @@ function verificarLavadoresAtivos() {
 // MOTOR DE FILTRAGEM CORRIGIDO (FUSO HORÁRIO E STRINGS PURAS)
 function filtrarLavagensPorData(lavagens, inicioStr, fimStr) {
     return lavagens.filter(l => {
-        // Pega apenas a parte YYYY-MM-DD da data gravada no sistema
         const dataItemStr = l.data.split('T')[0];
-        
         if (inicioStr && dataItemStr < inicioStr) return false;
         if (fimStr && dataItemStr > fimStr) return false;
-        
         return true;
     });
 }
@@ -603,7 +615,6 @@ function updateLavagemStatus(id, status) {
     const l = db.lavagens.find(l => l.id == id);
     if(l) {
         l.status = status;
-        // Atualiza a data do evento para o momento exato em que ele vira "Entregue" (garante precisão no relatório)
         if(status === 'Entregue') {
             l.data = new Date().toISOString();
         }
@@ -624,7 +635,6 @@ function showVeiculoInfo(placa) {
     }
 }
 
-// MOTOR DE DATA DOS RELATÓRIOS (CORRIGIDO PARA BUSCAR APENAS ENTREGUES)
 function getLavagensFiltradasRelatorio() {
     let l = (db.lavagens || []).filter(l => l.status === 'Entregue');
     if(currentRelatorioFilter.inicio || currentRelatorioFilter.fim) {
@@ -633,7 +643,6 @@ function getLavagensFiltradasRelatorio() {
     return l;
 }
 
-// 1. Relatório Diário (Resumo Executivo)
 function showRelatorioDiario() {
     const dados = getLavagensFiltradasRelatorio();
     const totalEntregas = dados.length;
@@ -652,7 +661,6 @@ function showRelatorioDiario() {
     `;
 }
 
-// 2. Relatório por Lavador
 function showRelatorioLavador() {
     const dados = getLavagensFiltradasRelatorio();
     let html = '<div class="relatorio-bloco"><h4>2. Relatório Por Lavador</h4>';
@@ -679,7 +687,6 @@ function showRelatorioLavador() {
     document.getElementById('relatorioConteudo').innerHTML = html;
 }
 
-// 3. Relatório por Tipo
 function showRelatorioTipo() {
     const dados = getLavagensFiltradasRelatorio();
     let html = '<div class="relatorio-bloco"><h4>3. Relatório Por Tipo</h4>';
@@ -705,7 +712,6 @@ function showRelatorioTipo() {
     document.getElementById('relatorioConteudo').innerHTML = html;
 }
 
-// 4. Relatório Geral (Formato de Lista Tabular)
 function showRelatorioGeral() {
     const dados = getLavagensFiltradasRelatorio();
     let html = `
@@ -762,7 +768,6 @@ function showRelatorioGeral() {
     document.getElementById('relatorioConteudo').innerHTML = html;
 }
 
-// Exportar Tabela Geral para Excel (.XLSX)
 function exportarXLSXRelatorio() {
     const dados = getLavagensFiltradasRelatorio();
     if(dados.length === 0) { showToast('Sem dados para exportar!', 'error'); return; }
@@ -789,7 +794,6 @@ function exportarXLSXRelatorio() {
     showToast('💾 Arquivo Excel Gerado!');
 }
 
-// CONFIGURAÇÕES DE BACKUP GERAL (SISTEMA)
 document.getElementById('btnBackup').onclick = function() {
     const wb = XLSX.utils.book_new();
     const wsLavadores = XLSX.utils.json_to_sheet(db.lavadores);
@@ -835,6 +839,11 @@ document.getElementById('fileImport').onchange = function(e) {
 loadData();
 initLicense();
 updateTrialDisplay();
+
+// CORREÇÃO DO BOTÃO FECHAR DA TELA DE INFORMAÇÕES E LICENÇA
+document.getElementById('closeTrialModal').onclick = function() {
+    document.getElementById('trialModal').style.display = 'none';
+};
 
 document.getElementById('btnLogin').onclick = function() {
     const u = document.getElementById('loginUser').value;
@@ -983,7 +992,6 @@ document.getElementById('formTipo').onsubmit = function(e) {
     showToast('Adicionado com sucesso!');
 };
 
-// ACOES DOS FILTROS DO RELATORIO
 document.getElementById('aplicarFiltroRelatorio').onclick = () => {
     currentRelatorioFilter.inicio = document.getElementById('relatorioDataInicio').value;
     currentRelatorioFilter.fim = document.getElementById('relatorioDataFim').value;
@@ -997,7 +1005,6 @@ document.getElementById('limparFiltroRelatorio').onclick = () => {
     showRelatorioGeral();
 };
 
-// ACOES DOS FILTROS DO DASHBOARD
 document.getElementById('aplicarFiltroDashboard').onclick = () => {
     currentDashboardFilter.inicio = document.getElementById('dashboardDataInicio').value;
     currentDashboardFilter.fim = document.getElementById('dashboardDataFim').value;
@@ -1011,7 +1018,6 @@ document.getElementById('limparFiltroDashboard').onclick = () => {
     renderDashboard();
 };
 
-// BIND DOS BOTOES DE MODELO DE RELATORIOS
 document.getElementById('btnRelDiario').onclick = showRelatorioDiario;
 document.getElementById('btnRelLavador').onclick = showRelatorioLavador;
 document.getElementById('btnRelTipo').onclick = showRelatorioTipo;
@@ -1043,4 +1049,4 @@ document.querySelectorAll('.bottom-menu .menu-item').forEach(item => {
 });
 </script>
 </body>
-</html
+</html>
